@@ -80,3 +80,11 @@ cropped_image1=image.crop((left,top,right,bot))
 cropped_image1.save("cropped_monro_green.jpg")
 print(cropped_image1.width)
 print(cropped_image1.height, end="\n\n")
+
+
+image=Image.open("monro.jpg")
+red=Image.open("blend_cropped_monro_red.jpg")
+blue=Image.open("blend_cropped_monro_blue.jpg")
+green=Image.open("cropped_monro_green.jpg")
+merged=Image.merge('RGB', (red, blue, green))
+merged.save("final_monro.jpg")
