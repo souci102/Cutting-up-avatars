@@ -23,4 +23,30 @@ green.save("monro_green.jpg")
 blue.save("monro_blue.jpg")
 
 new_image=Image.merge("RGB", (red, green, blue))
-new_image.save("new_monro.jpg")
+new_image.save("new_monro.jpg", end="\n\n")
+
+image=Image.open("monro_red.jpg")
+left=80
+top=0
+right=image.width
+bot=image.height
+cropped_image=image.crop((left,top,right,bot))
+cropped_image.save("cropped_monro_red.jpg")
+print(cropped_image.width)
+print(cropped_image.height, end="\n\n")
+
+image=Image.open("monro_red.jpg")
+print(image.width)
+left=40
+top=0
+right=image.width-40
+bot=image.height
+cropped_image=image.crop((left,top,right,bot))
+cropped_image.save("cropped_monro_red1.jpg")
+print(cropped_image.width)
+print(cropped_image.height, end="\n\n")
+
+image1 = Image.open("cropped_monro_red.jpg")
+image2 = Image.open("cropped_monro_red1.jpg")
+image3 = Image.blend(image1, image2, 0.5)
+image3.save("blend_cropped_monro_red.jpg")
