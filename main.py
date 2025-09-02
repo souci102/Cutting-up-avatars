@@ -21,3 +21,6 @@ red,green,blue=image.split()
 red.save("monro_red.jpg")
 green.save("monro_green.jpg")
 blue.save("monro_blue.jpg")
+
+new_image=Image.merge("RGB", (red, green, blue))
+new_image.save("new_monro.jpg")
