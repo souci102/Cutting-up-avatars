@@ -1,96 +1,70 @@
 from PIL import Image
 
 
-image=Image.open("example.png")
-rotated_image=image.rotate(45)
-rotated_image.save("rotated.png")
-
-print(image.mode)
-print(image.width)
-print(image.height, end="\n\n")
-
-image1=Image.open("lenna.jpg")
-print(image1.mode)
-cmyk_image = image.convert("RGB")
-print(cmyk_image.mode)
-print(image1.mode, end="\n\n")
-
 image=Image.open("monro.jpg")
-print(image.mode)
 red,green,blue=image.split()
-red.save("monro_red.jpg")
-green.save("monro_green.jpg")
-blue.save("monro_blue.jpg")
-
 new_image=Image.merge("RGB", (red, green, blue))
-new_image.save("new_monro.jpg", end="\n\n")
 
-image=Image.open("monro_red.jpg")
+
+image=red
+print(red.width)
+print(red.height, end="\n\n")
 left=80
 top=0
 right=image.width
 bot=image.height
-cropped_image=image.crop((left,top,right,bot))
-cropped_image.save("cropped_monro_red.jpg")
+cropped_image_red=image.crop((left,top,right,bot))
 
 
-image=Image.open("monro_red.jpg")
+image=red
 left=40
 top=0
 right=image.width-40
 bot=image.height
-cropped_image=image.crop((left,top,right,bot))
-cropped_image.save("cropped_monro_red1.jpg")
+cropped_image_red1=image.crop((left,top,right,bot))
 
-image1=Image.open("cropped_monro_red.jpg")
-image2=Image.open("cropped_monro_red1.jpg")
-image3=Image.blend(image1, image2, 0.5)
-image3.save("blend_cropped_monro_red.jpg")
 
-image=Image.open("monro_blue.jpg")
+image1=cropped_image_red
+image2=cropped_image_red1
+blend_cropped_monro_red=Image.blend(image1, image2, 0.5)
+
+
+image=blue
 left=0
 top=0
 right=image.width-80
 bot=image.height
-cropped_image=image.crop((left,top,right,bot))
-cropped_image.save("cropped_monro_blue.jpg")
+cropped_monro_blue=image.crop((left,top,right,bot))
 
 
-image=Image.open("monro_blue.jpg")
+image=blue
 left=40
 top=0
 right=image.width-40
 bot=image.height
-cropped_image=image.crop((left,top,right,bot))
-cropped_image.save("cropped_monro_blue1.jpg")
+cropped_monro_blue1=image.crop((left,top,right,bot))
 
 
-image1=Image.open("cropped_monro_blue.jpg")
-image2=Image.open("cropped_monro_blue1.jpg")
-image3=Image.blend(image1, image2, 0.5)
-image3.save("blend_cropped_monro_blue.jpg")
+image1=cropped_monro_blue
+image2=cropped_monro_blue1
+blend_cropped_monro_blue=Image.blend(image1, image2, 0.5)
 
 
-image=Image.open("monro_green.jpg")
+image=green
 left=40
 top=0
 right=image.width-40
 bot=image.height
-cropped_image1=image.crop((left,top,right,bot))
-cropped_image1.save("cropped_monro_green.jpg")
-print(cropped_image1.width)
-print(cropped_image1.height, end="\n\n")
+cropped_monro_green=image.crop((left,top,right,bot))
 
 
-image=Image.open("monro.jpg")
-red=Image.open("blend_cropped_monro_red.jpg")
-blue=Image.open("blend_cropped_monro_blue.jpg")
-green=Image.open("cropped_monro_green.jpg")
+red=blend_cropped_monro_red
+blue=blend_cropped_monro_blue
+green=cropped_monro_green
 merged=Image.merge('RGB', (red, blue, green))
 merged.save("final_monro.jpg")
 
 
 image=Image.open("final_monro.jpg")
-print(image.size)
 image.thumbnail((80, 80))  
-print(image.size, end="\n\n")
+image.save("for_avatar.jpg")
