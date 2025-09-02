@@ -1,70 +1,28 @@
 from PIL import Image
 
 
-image=Image.open("monro.jpg")
-red,green,blue=image.split()
-new_image=Image.merge("RGB", (red, green, blue))
+image = Image.open("monro.jpg")
+red, green, blue = image.split()
+new_image = Image.merge("RGB", (red, green, blue))
 
+coordinates_red = (80, 0, image.width, image.height)
+cropped_monro_red = red.crop(coordinates_red)
+coordinates_red = (40, 0, image.width-40, image.height)
+cropped_monro_red_for_blend = red.crop(coordinates_red)
+blend_cropped_monro_red = Image.blend(cropped_monro_red, cropped_monro_red_for_blend, 0.5)
 
-image=red
-print(red.width)
-print(red.height, end="\n\n")
-left=80
-top=0
-right=image.width
-bot=image.height
-cropped_image_red=image.crop((left,top,right,bot))
+coordinates_blue = (0, 0, image.width-80, image.height)
+cropped_monro_blue = blue.crop(coordinates_blue)
+coordinates_blue = (40, 0, image.width-40, image.height)
+cropped_monro_blue_for_blend = blue.crop(coordinates_blue)
+blend_cropped_monro_blue = Image.blend(cropped_monro_blue, cropped_monro_blue_for_blend, 0.5)
 
+coordinates_green = (40, 0, image.width-40, image.height)
+cropped_monro_green = green.crop(coordinates_green)
 
-image=red
-left=40
-top=0
-right=image.width-40
-bot=image.height
-cropped_image_red1=image.crop((left,top,right,bot))
-
-
-image1=cropped_image_red
-image2=cropped_image_red1
-blend_cropped_monro_red=Image.blend(image1, image2, 0.5)
-
-
-image=blue
-left=0
-top=0
-right=image.width-80
-bot=image.height
-cropped_monro_blue=image.crop((left,top,right,bot))
-
-
-image=blue
-left=40
-top=0
-right=image.width-40
-bot=image.height
-cropped_monro_blue1=image.crop((left,top,right,bot))
-
-
-image1=cropped_monro_blue
-image2=cropped_monro_blue1
-blend_cropped_monro_blue=Image.blend(image1, image2, 0.5)
-
-
-image=green
-left=40
-top=0
-right=image.width-40
-bot=image.height
-cropped_monro_green=image.crop((left,top,right,bot))
-
-
-red=blend_cropped_monro_red
-blue=blend_cropped_monro_blue
-green=cropped_monro_green
-merged=Image.merge('RGB', (red, blue, green))
+merged = Image.merge('RGB', (blend_cropped_monro_red, blend_cropped_monro_blue, cropped_monro_green))
 merged.save("final_monro.jpg")
 
-
-image=Image.open("final_monro.jpg")
+image = Image.open("final_monro.jpg")
 image.thumbnail((80, 80))  
 image.save("for_avatar.jpg")
