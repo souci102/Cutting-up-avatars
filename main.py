@@ -46,7 +46,32 @@ cropped_image.save("cropped_monro_red1.jpg")
 print(cropped_image.width)
 print(cropped_image.height, end="\n\n")
 
-image1 = Image.open("cropped_monro_red.jpg")
-image2 = Image.open("cropped_monro_red1.jpg")
-image3 = Image.blend(image1, image2, 0.5)
+image1=Image.open("cropped_monro_red.jpg")
+image2=Image.open("cropped_monro_red1.jpg")
+image3=Image.blend(image1, image2, 0.5)
 image3.save("blend_cropped_monro_red.jpg")
+
+image=Image.open("monro_blue.jpg")
+left=0
+top=0
+right=image.width-80
+bot=image.height
+cropped_image=image.crop((left,top,right,bot))
+cropped_image.save("cropped_monro_blue.jpg")
+print(cropped_image.width)
+print(cropped_image.height, end="\n\n")
+
+image=Image.open("monro_blue.jpg")
+left=40
+top=0
+right=image.width-40
+bot=image.height
+cropped_image=image.crop((left,top,right,bot))
+cropped_image.save("cropped_monro_blue1.jpg")
+print(cropped_image.width)
+print(cropped_image.height, end="\n\n")
+
+image1=Image.open("cropped_monro_blue.jpg")
+image2=Image.open("cropped_monro_blue1.jpg")
+image3=Image.blend(image1, image2, 0.5)
+image3.save("blend_cropped_monro_blue.jpg")
