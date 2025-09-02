@@ -1,7 +1,7 @@
 from PIL import Image
 
 
-image = Image.open("example.png")
+image=Image.open("example.png")
 rotated_image=image.rotate(45)
 rotated_image.save("rotated.png")
 
@@ -14,3 +14,10 @@ print(image1.mode)
 cmyk_image = image.convert("RGB")
 print(cmyk_image.mode)
 print(image1.mode, end="\n\n")
+
+image=Image.open("monro.jpg")
+print(image.mode)
+red,green,blue=image.split()
+red.save("monro_red.jpg")
+green.save("monro_green.jpg")
+blue.save("monro_blue.jpg")
