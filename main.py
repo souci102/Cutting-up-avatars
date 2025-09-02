@@ -88,3 +88,9 @@ blue=Image.open("blend_cropped_monro_blue.jpg")
 green=Image.open("cropped_monro_green.jpg")
 merged=Image.merge('RGB', (red, blue, green))
 merged.save("final_monro.jpg")
+
+
+image=Image.open("final_monro.jpg")
+print(image.size)
+image.thumbnail((80, 80))  
+print(image.size, end="\n\n")
